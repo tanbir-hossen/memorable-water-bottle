@@ -9,12 +9,20 @@ const Bottles = () => {
         .then(res => res.json())
         .then(data => setBottles(data))
     })
+
+    const [cart, setCart] = useState([]);
+
+    const handleAddToCart = bottle => {
+        const newCart = [...cart, bottle];
+        setCart(newCart)
+    }
     return (
         <div>
-            <h3>from bottles {bottles.length}</h3>
+            <h3>Bottles Availabe: {bottles.length}</h3>
+            <h3>Cart: {cart.length}</h3>
             <div className="bottle-container">
             {
-                bottles.map(bottle => <Bottle key={bottle.id} bottle={bottle}></Bottle>)
+                bottles.map(bottle => <Bottle key={bottle.id} bottle={bottle} handleAddToCart={handleAddToCart}></Bottle>)
             }
             </div>
         </div>
